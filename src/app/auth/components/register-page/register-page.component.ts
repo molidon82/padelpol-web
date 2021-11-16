@@ -20,8 +20,8 @@ export class RegisterPageComponent implements OnInit {
     passwordConfirmation: [''],
   });
 
-  paddleLevels!: PaddleLevelApiResponse[];
-  filteredPaddleLevels!: Observable<PaddleLevelApiResponse[]>;
+  paddleLevels: PaddleLevelApiResponse[];
+  filteredPaddleLevels: Observable<PaddleLevelApiResponse[]>;
 
   constructor(private fb: FormBuilder, private authApiService: AuthApiService, private sweetalertService: SweetalertService) { }
 
