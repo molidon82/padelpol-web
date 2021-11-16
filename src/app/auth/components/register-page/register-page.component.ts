@@ -51,7 +51,19 @@ export class RegisterPageComponent implements OnInit {
     const params = this.registerForm.value;
     if (typeof params.paddleLevel == 'string') return this.sweetalertService.warning("El nivel de padel es obligatorio");
     if (params.password != params.passwordConfirmation) return this.sweetalertService.warning("Las contraseñas han de ser iguales");
-    console.log("Formulario correcto");
+    this.authApiService.register({
+      name: params.name,
+      paddle_level_id: params.paddleLevel.id,
+      email: params.email,
+      password: params.password,
+      password_confirmation: params.passwordConfirmation
+    }).subscribe({
+      next: res => {
+        this.sweetalertService.success("Usuario creado correctamente", "Por favor, inicie sesión con el mismo");
+      },
+      error: err => this.sweetalertService.error("Ya existe un usuario con dicho email")
+    });
+
   }
 
 }

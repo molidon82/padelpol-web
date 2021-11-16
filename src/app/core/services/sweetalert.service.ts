@@ -8,6 +8,14 @@ export class SweetalertService {
 
   constructor() { }
 
+  success(title: string, subtitle?: string) {
+    return Swal.fire({
+      icon: 'success',
+      title: title,
+      text: subtitle,
+    });
+  }
+  
   warning(title: string, subtitle?: string) {
     return Swal.fire({
       icon: 'warning',
@@ -16,4 +24,12 @@ export class SweetalertService {
     });
   }
   
+  error(title: string, subtitle?: string) {
+    return Swal.fire({
+      icon: 'error',
+      title: title,
+      text: subtitle,
+    });
+  }
+
 }
