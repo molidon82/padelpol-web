@@ -15,7 +15,7 @@ export class SweetalertService {
       text: subtitle,
     });
   }
-  
+
   warning(title: string, subtitle?: string) {
     return Swal.fire({
       icon: 'warning',
@@ -23,13 +23,24 @@ export class SweetalertService {
       text: subtitle,
     });
   }
-  
+
   error(title: string, subtitle?: string) {
     return Swal.fire({
       icon: 'error',
       title: title,
       text: subtitle,
     });
+  }
+
+  showApiErrors(response: { error?: object }) {
+    const messages = Object.values(response.error || {}).reduce((sol, element) => {
+      sol = sol.concat(element);
+      return sol;
+    }, []);
+
+    if (messages.length == 0) messages.push("Error inesperado.");
+
+    return this.error(messages.join("\n"));
   }
 
 }
