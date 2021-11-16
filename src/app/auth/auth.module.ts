@@ -13,10 +13,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 
 @NgModule({
   declarations: [
-    RegisterPageComponent
+    RegisterPageComponent,
+    LoginPageComponent
   ],
   imports: [
     CommonModule, AuthRoutingModule, MatFormFieldModule, MatAutocompleteModule,
