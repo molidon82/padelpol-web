@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { SweetalertService } from 'src/app/core/services/sweetalert.service';
 import { AuthApiService } from '../../services/auth-api.service';
 
@@ -15,7 +16,7 @@ export class LoginPageComponent implements OnInit {
     password: [''],
   });
 
-  constructor(private fb: FormBuilder, private authApiService: AuthApiService, private sweetalertService: SweetalertService) { }
+  constructor(private fb: FormBuilder, private authApiService: AuthApiService, private sweetalertService: SweetalertService, private sessionStorageService: SessionStorageService) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,7 @@ export class LoginPageComponent implements OnInit {
   onLoginSubmit() {
     this.authApiService.login(this.loginForm.value).subscribe({
       next: res => {
-        console.log(res);
+        this.sessionStorageService.setItem("token", res.access_token);
       },
       error: errorResponse => {
         this.sweetalertService.showApiErrors(errorResponse);
