@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { SweetalertService } from 'src/app/core/services/sweetalert.service';
+import { AuthApiService } from '../../services/auth-api.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,13 +15,20 @@ export class LoginPageComponent implements OnInit {
     password: [''],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authApiService: AuthApiService, private sweetalertService: SweetalertService) { }
 
   ngOnInit(): void {
   }
 
   onLoginSubmit() {
-    console.log(this.loginForm.value);
+    this.authApiService.login(this.loginForm.value).subscribe({
+      next: res => {
+        console.log(res);
+      },
+      error: errorResponse => {
+        this.sweetalertService.showApiErrors(errorResponse);
+      }
+    });
   }
 
 }
