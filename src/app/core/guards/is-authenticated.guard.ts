@@ -3,17 +3,17 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/app-routes';
 import { authRoutes } from 'src/app/auth/auth-routes';
-import { SessionStorageService } from '../services/session-storage.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsAuthenticatedGuard implements CanActivate {
 
-  constructor(private sessionStorageService: SessionStorageService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.sessionStorageService.getItem("token")) return this.router.navigate([`${appRoutes.authModule}/${authRoutes.loginPage}`]);
+    if (!this.authService.getCurrentUser()) return this.router.navigate([`${appRoutes.authModule}/${authRoutes.loginPage}`]);
     return true;
   }
 
