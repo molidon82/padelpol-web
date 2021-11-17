@@ -12,6 +12,7 @@ export class LoadingService {
     'inset: 0;',
     'background: rgba(0, 0, 0, 0.6) url("assets/images/loading-padelpol.gif") center center no-repeat;',
   ];
+  private count = 0;
 
   constructor() { 
     this.loadingElement = document.createElement("div");
@@ -20,11 +21,13 @@ export class LoadingService {
   }
 
   start() {
-    this.loadingElement.style.display = 'block';
+    this.count++;
+    if (this.count == 1) this.loadingElement.style.display = 'block';
   }
 
   stop() {
-    this.loadingElement.style.display = 'none';
+    if (this.count > 0) this.count--;
+    if (this.count == 0) this.loadingElement.style.display = 'none';
   }
 
 }
