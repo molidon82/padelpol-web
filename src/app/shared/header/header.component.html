@@ -33,7 +33,7 @@
                         Liga
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="user?.can('SEE_PLAYERS')">
                     <a routerLink="/jugadores" class="nav-link pointer pr-3"
                         [ngClass]="{'active': (router.url.includes('jugadores'))}" data-bs-toggle="collapse"
                         data-bs-target="#headerNavbar.show">
