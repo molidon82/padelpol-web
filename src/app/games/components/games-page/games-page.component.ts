@@ -17,9 +17,7 @@ export class GamesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.gamesApiService.getGames().subscribe({
-      next: res => {
-        this.games = res;
-      },
+      next: res => this.games = res,
       error: err => this.sweetalertService.showApiErrors(err)
     });
   }
