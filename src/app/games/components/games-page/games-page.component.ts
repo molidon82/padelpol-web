@@ -19,10 +19,4 @@ export class GamesPageComponent implements OnInit {
     // });
   }
   
-  openShowUserDialog(): void {
-    // this.dialog.open(ShowUserDialogComponent, {
-    //   data: {}
-    // });
-  }
-
 }
